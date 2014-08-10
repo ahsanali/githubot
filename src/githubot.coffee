@@ -46,26 +46,16 @@ class Github
     task = run: (cb) -> req[verb.toLowerCase()](args...) cb
     @requestQueue.push task, (err, res, body) =>
       if err?
-        return @_errorHandler
-          statusCode: res?.statusCode
-          body: res?.body
-          error: err
-
+        cb null,err
       try
         responseData = JSON.parse body if body
       catch e
-        return @_errorHandler
-          statusCode: res.statusCode
-          body: body
-          error: "Could not parse response: #{body}"
-
+        cb null,err
       if (200 <= res.statusCode < 300)
-        cb responseData
+        cb responseData, null
       else
-        @_errorHandler
-          statusCode: res.statusCode
-          body: body
-          error: responseData.message
+        cb null,err
+        
 
   get: (url, data, cb) ->
     unless cb?
@@ -75,6 +65,7 @@ class Github
     @request "GET", url, cb
 
   post: (url, data, cb) ->
+    @logger.error "right"
     @request "POST", url, data, cb
 
   delete: (url, cb) ->
@@ -130,7 +121,7 @@ github[method] = func for method,func of Github.prototype
 github.logger = {
   error: (msg) ->
     util = require "util"
-    util.error "ERROR: #{msg}"
+    util.error "ERROR1: #{msg}"
   debug: ->
 }
 
