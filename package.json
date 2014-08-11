@@ -3,10 +3,10 @@
   "name": "githubot",
   "description": "Hubot-compatible Github API wrapper for Node.js",
   "version": "1.0.0-beta2",
-  "homepage": "https://github.com/iangreenleaf/githubot",
+  "homepage": "https://github.com/ahsanali/githubot",
   "repository": {
     "type": "git",
-    "url": "git@github.com:iangreenleaf/githubot.git"
+    "url": "git@github.com:ahsanali/githubot.git"
   },
   "main": "./lib/githubot",
   "scripts": {
